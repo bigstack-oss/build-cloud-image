@@ -2,10 +2,6 @@
 echo "------ creating ubuntu 20.04 LTS ------"
 rm -rf ./images/ubuntu2004.qcow2
 wget https://cloud-images.ubuntu.com/focal/current/focal-server-cloudimg-amd64.img -O ./images/ubuntu2004.qcow2
-echo "------ fix CVE-2024-1086 ------"
-qemu-img resize ./images/ubuntu2004.qcow2 +1.5G
-sudo virt-customize --run-command "growpart /dev/sda 1" -a ./images/ubuntu2004.qcow2
-sudo virt-customize --run-command "apt install -y linux-headers-5.15.0-107-generic linux-image-5.15.0-107-generic" -a ./images/ubuntu2004.qcow2
 echo "------ install pkg ------"
 sudo virt-customize --install nfs-common --selinux-relabel -a ./images/ubuntu2004.qcow2
 sudo virt-customize --install cifs-utils --selinux-relabel -a ./images/ubuntu2004.qcow2
