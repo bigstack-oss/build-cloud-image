@@ -1,6 +1,7 @@
 [highavailability]
 name=CentOS Stream $releasever - HighAvailability
-metalink=https://mirrors.centos.org/metalink?repo=centos-highavailability-$stream&arch=$basearch&protocol=https,http
+#metalink=https://mirrors.centos.org/metalink?repo=centos-highavailability-$stream&arch=$basearch&protocol=https,http
+baseurl=http://free.nchc.org.tw/centos-stream/9-stream/HighAvailability/$basearch/os/
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial
 gpgcheck=1
 repo_gpgcheck=0
@@ -10,7 +11,8 @@ enabled=0
 
 [highavailability-debuginfo]
 name=CentOS Stream $releasever - HighAvailability - Debug
-metalink=https://mirrors.centos.org/metalink?repo=centos-highavailability-debug-$stream&arch=$basearch&protocol=https,http
+#metalink=https://mirrors.centos.org/metalink?repo=centos-highavailability-debug-$stream&arch=$basearch&protocol=https,http
+baseurl=http://free.nchc.org.tw/centos-stream/9-stream/HighAvailability/$basearch/os/
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial
 gpgcheck=1
 repo_gpgcheck=0
@@ -19,7 +21,8 @@ enabled=0
 
 [highavailability-source]
 name=CentOS Stream $releasever - HighAvailability - Source
-metalink=https://mirrors.centos.org/metalink?repo=centos-highavailability-source-$stream&arch=source&protocol=https,http
+#metalink=https://mirrors.centos.org/metalink?repo=centos-highavailability-source-$stream&arch=source&protocol=https,http
+baseurl=http://free.nchc.org.tw/centos-stream/9-stream/HighAvailability/$basearch/os/
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial
 gpgcheck=1
 repo_gpgcheck=0
@@ -28,7 +31,8 @@ enabled=0
 
 [nfv]
 name=CentOS Stream $releasever - NFV
-metalink=https://mirrors.centos.org/metalink?repo=centos-nfv-$stream&arch=$basearch&protocol=https,http
+#metalink=https://mirrors.centos.org/metalink?repo=centos-nfv-$stream&arch=$basearch&protocol=https,http
+baseurl=http://free.nchc.org.tw/centos-stream/9-stream/NFV/$basearch/os/
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial
 gpgcheck=1
 repo_gpgcheck=0
@@ -38,7 +42,8 @@ enabled=0
 
 [nfv-debuginfo]
 name=CentOS Stream $releasever - NFV - Debug
-metalink=https://mirrors.centos.org/metalink?repo=centos-nfv-debug-$stream&arch=$basearch&protocol=https,http
+#metalink=https://mirrors.centos.org/metalink?repo=centos-nfv-debug-$stream&arch=$basearch&protocol=https,http
+baseurl=http://free.nchc.org.tw/centos-stream/9-stream/NFV/$basearch/os/
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial
 gpgcheck=1
 repo_gpgcheck=0
@@ -47,7 +52,8 @@ enabled=0
 
 [nfv-source]
 name=CentOS Stream $releasever - NFV - Source
-metalink=https://mirrors.centos.org/metalink?repo=centos-nfv-source-$stream&arch=source&protocol=https,http
+#metalink=https://mirrors.centos.org/metalink?repo=centos-nfv-source-$stream&arch=source&protocol=https,http
+baseurl=http://free.nchc.org.tw/centos-stream/9-stream/NFV/$basearch/os/
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial
 gpgcheck=1
 repo_gpgcheck=0
@@ -56,7 +62,8 @@ enabled=0
 
 [rt]
 name=CentOS Stream $releasever - RT
-metalink=https://mirrors.centos.org/metalink?repo=centos-rt-$stream&arch=$basearch&protocol=https,http
+#metalink=https://mirrors.centos.org/metalink?repo=centos-rt-$stream&arch=$basearch&protocol=https,http
+baseurl=http://free.nchc.org.tw/centos-stream/9-stream/RT/$basearch/os/
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial
 gpgcheck=1
 repo_gpgcheck=0
@@ -66,7 +73,8 @@ enabled=0
 
 [rt-debuginfo]
 name=CentOS Stream $releasever - RT - Debug
-metalink=https://mirrors.centos.org/metalink?repo=centos-rt-debug-$stream&arch=$basearch&protocol=https,http
+#metalink=https://mirrors.centos.org/metalink?repo=centos-rt-debug-$stream&arch=$basearch&protocol=https,http
+baseurl=http://free.nchc.org.tw/centos-stream/9-stream/RT/$basearch/os/
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial
 gpgcheck=1
 repo_gpgcheck=0
@@ -75,7 +83,8 @@ enabled=0
 
 [rt-source]
 name=CentOS Stream $releasever - RT - Source
-metalink=https://mirrors.centos.org/metalink?repo=centos-rt-source-$stream&arch=source&protocol=https,http
+#metalink=https://mirrors.centos.org/metalink?repo=centos-rt-source-$stream&arch=source&protocol=https,http
+baseurl=http://free.nchc.org.tw/centos-stream/9-stream/RT/$basearch/os/
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial
 gpgcheck=1
 repo_gpgcheck=0
@@ -84,7 +93,8 @@ enabled=0
 
 [resilientstorage]
 name=CentOS Stream $releasever - ResilientStorage
-metalink=https://mirrors.centos.org/metalink?repo=centos-resilientstorage-$stream&arch=$basearch&protocol=https,http
+#metalink=https://mirrors.centos.org/metalink?repo=centos-resilientstorage-$stream&arch=$basearch&protocol=https,http
+baseurl=http://free.nchc.org.tw/centos-stream/9-stream/ResilientStorage/$basearch/os/
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial
 gpgcheck=1
 repo_gpgcheck=0
@@ -94,7 +104,8 @@ enabled=0
 
 [resilientstorage-debuginfo]
 name=CentOS Stream $releasever - ResilientStorage - Debug
-metalink=https://mirrors.centos.org/metalink?repo=centos-resilientstorage-debug-$stream&arch=$basearch&protocol=https,http
+#metalink=https://mirrors.centos.org/metalink?repo=centos-resilientstorage-debug-$stream&arch=$basearch&protocol=https,http
+baseurl=http://free.nchc.org.tw/centos-stream/9-stream/ResilientStorage/$basearch/os/
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial
 gpgcheck=1
 repo_gpgcheck=0
@@ -103,7 +114,8 @@ enabled=0
 
 [resilientstorage-source]
 name=CentOS Stream $releasever - ResilientStorage - Source
-metalink=https://mirrors.centos.org/metalink?repo=centos-resilientstorage-source-$stream&arch=source&protocol=https,http
+#metalink=https://mirrors.centos.org/metalink?repo=centos-resilientstorage-source-$stream&arch=source&protocol=https,http
+baseurl=http://free.nchc.org.tw/centos-stream/9-stream/ResilientStorage/$basearch/os/
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial
 gpgcheck=1
 repo_gpgcheck=0
@@ -128,4 +140,3 @@ gpgcheck=1
 repo_gpgcheck=0
 metadata_expire=6h
 enabled=0
-
