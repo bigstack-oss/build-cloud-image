@@ -54,7 +54,7 @@ sudo virt-copy-in './config/debian/cloud.cfg' /etc/cloud/ -a ./images/debian-12-
 sudo virt-copy-in './config/daemon.json' /etc/docker/ -a ./images/debian-12-bookworm.qcow2
 echo "------ disable kernel auto update ------"
 sudo virt-copy-in './config/ubuntu/20auto-upgrades' /etc/apt/apt.conf.d/ -a ./images/debian-12-bookworm.qcow2
-echi "------ disable TCP Segmentation Offload (TSO) -----"
-sudo virt-copy-in './config/98-disable-tso.cfg' /etc/cloud/cloud.cfg.d/ -a ./images/debian-12-bookworm.qcow2
+# echo "------ disable TCP Segmentation Offload (TSO) -----"
+# sudo virt-copy-in './config/98-disable-tso.cfg' /etc/cloud/cloud.cfg.d/ -a ./images/debian-12-bookworm.qcow2
 sudo virt-sysprep -a ./images/debian-12-bookworm.qcow2
 echo "------ Done ------"
