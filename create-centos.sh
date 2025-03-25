@@ -11,14 +11,14 @@ sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/centos/getty@tty1.service'
 sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/centos/cloud.cfg' /etc/cloud/ -a ./images/centos-7.qcow2
 sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/daemon.json' /etc/docker/ -a ./images/centos-7.qcow2
 echo "------ update repo ------"
-sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/centos-7-vault/CentOS-Base.repo' /etc/yum.repos.d/ -a images/centos-7.qcow2
-sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/centos-7-vault/CentOS-CR.repo' /etc/yum.repos.d/ -a images/centos-7.qcow2
-sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/centos-7-vault/CentOS-Debuginfo.repo' /etc/yum.repos.d/ -a images/centos-7.qcow2
-sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/centos-7-vault/CentOS-fasttrack.repo' /etc/yum.repos.d/ -a images/centos-7.qcow2
-sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/centos-7-vault/CentOS-Media.repo' /etc/yum.repos.d/ -a images/centos-7.qcow2
-sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/centos-7-vault/CentOS-Sources.repo' /etc/yum.repos.d/ -a images/centos-7.qcow2
-sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/centos-7-vault/CentOS-Vault.repo' /etc/yum.repos.d/ -a images/centos-7.qcow2
-sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/centos-7-vault/CentOS-x86_64-kernel.repo' /etc/yum.repos.d/ -a images/centos-7.qcow2
+sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/centos7-vault/CentOS-Base.repo' /etc/yum.repos.d/ -a images/centos-7.qcow2
+sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/centos7-vault/CentOS-CR.repo' /etc/yum.repos.d/ -a images/centos-7.qcow2
+sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/centos7-vault/CentOS-Debuginfo.repo' /etc/yum.repos.d/ -a images/centos-7.qcow2
+sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/centos7-vault/CentOS-fasttrack.repo' /etc/yum.repos.d/ -a images/centos-7.qcow2
+sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/centos7-vault/CentOS-Media.repo' /etc/yum.repos.d/ -a images/centos-7.qcow2
+sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/centos7-vault/CentOS-Sources.repo' /etc/yum.repos.d/ -a images/centos-7.qcow2
+sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/centos7-vault/CentOS-Vault.repo' /etc/yum.repos.d/ -a images/centos-7.qcow2
+sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/centos7-vault/CentOS-x86_64-kernel.repo' /etc/yum.repos.d/ -a images/centos-7.qcow2
 echo "------ install pkg ------"
 sudo LIBGUESTFS_BACKEND=direct virt-customize --install nfs-utils --selinux-relabel -a ./images/centos-7.qcow2
 sudo LIBGUESTFS_BACKEND=direct virt-customize --install cifs-utils --selinux-relabel -a ./images/centos-7.qcow2
