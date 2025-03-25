@@ -10,7 +10,6 @@
 
 [resilientstorage]
 name=CentOS Stream $releasever - ResilientStorage
-#vault.ist=http://vault.ist.centos.org/?release=$stream&arch=$basearch&repo=ResilientStorage&infra=$infra
 baseurl=http://vault.centos.org/$contentdir/$stream/ResilientStorage/$basearch/os/
 gpgcheck=1
 enabled=0

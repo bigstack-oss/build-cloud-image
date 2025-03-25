@@ -2,7 +2,6 @@
 
 [fasttrack]
 name=CentOS-7 - fasttrack
-#vault.ist=http://vault.ist.centos.org/?release=$releasever&arch=$basearch&repo=fasttrack&infra=$infra
 baseurl=http://vault.centos.org/centos/$releasever/fasttrack/$basearch/
 gpgcheck=1
 enabled=0

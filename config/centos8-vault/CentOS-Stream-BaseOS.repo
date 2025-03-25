@@ -10,7 +10,6 @@
 
 [baseos]
 name=CentOS Stream $releasever - BaseOS
-#vault.ist=http://vault.ist.centos.org/?release=$stream&arch=$basearch&repo=BaseOS&infra=$infra
 baseurl=http://vault.centos.org/$contentdir/$stream/BaseOS/$basearch/os/
 gpgcheck=1
 enabled=1

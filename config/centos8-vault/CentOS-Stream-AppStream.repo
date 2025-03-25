@@ -10,7 +10,6 @@
 
 [appstream]
 name=CentOS Stream $releasever - AppStream
-#vault.ist=http://vault.ist.centos.org/?release=$stream&arch=$basearch&repo=AppStream&infra=$infra
 baseurl=http://vault.centos.org/$contentdir/$stream/AppStream/$basearch/os/
 gpgcheck=1
 enabled=1

@@ -10,7 +10,6 @@
 
 [powertools]
 name=CentOS Stream $releasever - PowerTools
-#vault.ist=http://vault.ist.centos.org/?release=$stream&arch=$basearch&repo=PowerTools&infra=$infra
 baseurl=http://vault.centos.org/$contentdir/$stream/PowerTools/$basearch/os/
 gpgcheck=1
 enabled=0

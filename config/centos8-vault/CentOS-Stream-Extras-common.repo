@@ -10,7 +10,6 @@
 
 [extras-common]
 name=CentOS Stream $releasever - Extras common packages
-#vault.ist=http://vault.ist.centos.org/?release=$stream&arch=$basearch&repo=extras-extras-common
 baseurl=http://vault.centos.org/$contentdir/$stream/extras/$basearch/extras-common/
 gpgcheck=1
 enabled=1

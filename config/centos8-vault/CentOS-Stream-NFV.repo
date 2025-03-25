@@ -10,7 +10,6 @@
 
 [nfv]
 name=CentOS Stream $releasever - NFV
-#vault.ist=http://vault.ist.centos.org/?release=$stream&arch=$basearch&repo=NFV&infra=$infra
 baseurl=http://vault.centos.org/$contentdir/$stream/NFV/$basearch/os/
 gpgcheck=1
 enabled=0

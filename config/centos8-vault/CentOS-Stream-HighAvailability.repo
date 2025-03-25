@@ -10,7 +10,6 @@
 
 [ha]
 name=CentOS Stream $releasever - HighAvailability
-#vault.ist=http://vault.ist.centos.org/?release=$stream&arch=$basearch&repo=HighAvailability&infra=$infra
 baseurl=http://vault.centos.org/$contentdir/$stream/HighAvailability/$basearch/os/
 gpgcheck=1
 enabled=0

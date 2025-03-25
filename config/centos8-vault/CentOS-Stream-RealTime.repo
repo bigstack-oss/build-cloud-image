@@ -10,7 +10,6 @@
 
 [rt]
 name=CentOS Stream $releasever - RealTime
-#vault.ist=http://vault.ist.centos.org/?release=$stream&arch=$basearch&repo=RT&infra=$infra
 baseurl=http://vault.centos.org/$contentdir/$stream/RT/$basearch/os/
 gpgcheck=1
 enabled=0
