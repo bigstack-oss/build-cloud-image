@@ -10,6 +10,7 @@ cp ./config/centos/cloud-c7.cfg ./config/centos/cloud.cfg
 sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/centos/getty@tty1.service' /lib/systemd/system/ -a ./images/centos-7.qcow2
 sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/centos/cloud.cfg' /etc/cloud/ -a ./images/centos-7.qcow2
 sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/daemon.json' /etc/docker/ -a ./images/centos-7.qcow2
+sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command 'sed -i "s/^SELINUX=enforcing/SELINUX=permissive/" /etc/selinux/config' -a ./images/centos-7.qcow2
 echo "------ update repo ------"
 sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/centos7-vault/CentOS-Base.repo' /etc/yum.repos.d/ -a images/centos-7.qcow2
 sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/centos7-vault/CentOS-CR.repo' /etc/yum.repos.d/ -a images/centos-7.qcow2
@@ -38,6 +39,7 @@ cp ./config/centos/cloud-c8.cfg ./config/centos/cloud.cfg
 sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/centos/getty@tty1.service' /lib/systemd/system/ -a ./images/centos-stream-8.qcow2
 sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/centos/cloud.cfg' /etc/cloud/ -a ./images/centos-stream-8.qcow2
 sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/daemon.json' /etc/docker/ -a ./images/centos-stream-8.qcow2
+sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command 'sed -i "s/^SELINUX=enforcing/SELINUX=permissive/" /etc/selinux/config' -a ./images/centos-stream-8.qcow2
 echo "------ update repo ------"
 sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/centos8-vault/CentOS-Stream-AppStream.repo' /etc/yum.repos.d/ -a images/centos-stream-8.qcow2
 sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/centos8-vault/CentOS-Stream-BaseOS.repo' /etc/yum.repos.d/ -a images/centos-stream-8.qcow2
@@ -70,6 +72,7 @@ cp ./config/centos/cloud-c9.cfg ./config/centos/cloud.cfg
 sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/centos/getty@tty1.service' /lib/systemd/system/ -a ./images/centos-stream-9.qcow2
 sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/centos/cloud.cfg' /etc/cloud/ -a ./images/centos-stream-9.qcow2
 sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/daemon.json' /etc/docker/ -a ./images/centos-stream-9.qcow2
+sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command 'sed -i "s/^SELINUX=enforcing/SELINUX=permissive/" /etc/selinux/config' -a ./images/centos-stream-9.qcow2
 echo "------ install pkg ------"
 sudo LIBGUESTFS_BACKEND=direct virt-customize --install nfs-utils --selinux-relabel -a ./images/centos-stream-9.qcow2
 sudo LIBGUESTFS_BACKEND=direct virt-customize --install cifs-utils --selinux-relabel -a ./images/centos-stream-9.qcow2
@@ -89,6 +92,7 @@ cp ./config/centos/cloud-c10.cfg ./config/centos/cloud.cfg
 sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/centos/getty@tty1.service' /lib/systemd/system/ -a ./images/centos-stream-10.qcow2
 sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/centos/cloud.cfg' /etc/cloud/ -a ./images/centos-stream-10.qcow2
 sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/daemon.json' /etc/docker/ -a ./images/centos-stream-10.qcow2
+sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command 'sed -i "s/^SELINUX=enforcing/SELINUX=permissive/" /etc/selinux/config' -a ./images/centos-stream-10.qcow2
 echo "------ install pkg ------"
 sudo LIBGUESTFS_BACKEND=direct virt-customize --install nfs-utils --selinux-relabel -a ./images/centos-stream-10.qcow2
 sudo LIBGUESTFS_BACKEND=direct virt-customize --install cifs-utils --selinux-relabel -a ./images/centos-stream-10.qcow2

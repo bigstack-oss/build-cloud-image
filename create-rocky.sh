@@ -14,6 +14,7 @@ cp ./config/rocky/cloud-r8.cfg ./config/rocky/cloud.cfg
 sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/rocky/getty@tty1.service' /lib/systemd/system/ -a ./images/rocky8.qcow2
 sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/rocky/cloud.cfg' /etc/cloud/ -a ./images/rocky8.qcow2
 sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/daemon.json' /etc/docker/ -a ./images/rocky8.qcow2
+sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command 'sed -i "s/^SELINUX=enforcing/SELINUX=permissive/" /etc/selinux/config' -a ./images/rocky8.qcow2
 echo "------ disable kernel auto update ------"
 sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command "echo 'exclude=kernel*' >> /etc/yum.conf" -a ./images/rocky8.qcow2
 sudo LIBGUESTFS_BACKEND=direct virt-sysprep -a ./images/rocky8.qcow2
@@ -33,6 +34,7 @@ cp ./config/rocky/cloud-r9.cfg ./config/rocky/cloud.cfg
 sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/rocky/getty@tty1.service' /lib/systemd/system/ -a ./images/rocky9.qcow2
 sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/rocky/cloud.cfg' /etc/cloud/ -a ./images/rocky9.qcow2
 sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/daemon.json' /etc/docker/ -a ./images/rocky9.qcow2
+sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command 'sed -i "s/^SELINUX=enforcing/SELINUX=permissive/" /etc/selinux/config' -a ./images/rocky9.qcow2
 echo "------ disable kernel auto update ------"
 sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command "echo 'exclude=kernel*' >> /etc/yum.conf" -a ./images/rocky9.qcow2
 sudo LIBGUESTFS_BACKEND=direct virt-sysprep -a ./images/rocky9.qcow2
