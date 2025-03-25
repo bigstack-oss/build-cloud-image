@@ -1,0 +1,17 @@
+# CentOS-Stream-BaseOS.repo
+#
+# The vault.ist system uses the connecting IP address of the client and the
+# update status of each vault.to pick current vault. that are geographically
+# close to the client.  You should use this for CentOS updates unless you are
+# manually picking other vault..
+#
+# If the vault.ist does not work for you, you can try the commented out
+# baseurl line instead.
+
+[baseos]
+name=CentOS Stream $releasever - BaseOS
+#vault.ist=http://vault.ist.centos.org/?release=$stream&arch=$basearch&repo=BaseOS&infra=$infra
+baseurl=http://vault.centos.org/$contentdir/$stream/BaseOS/$basearch/os/
+gpgcheck=1
+enabled=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial

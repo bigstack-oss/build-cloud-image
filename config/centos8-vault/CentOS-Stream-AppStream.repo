@@ -1,0 +1,17 @@
+# CentOS-Stream-AppStream.repo
+#
+# The vault.ist system uses the connecting IP address of the client and the
+# update status of each vault.to pick current vault. that are geographically
+# close to the client.  You should use this for CentOS updates unless you are
+# manually picking other vault..
+#
+# If the vault.ist does not work for you, you can try the commented out
+# baseurl line instead.
+
+[appstream]
+name=CentOS Stream $releasever - AppStream
+#vault.ist=http://vault.ist.centos.org/?release=$stream&arch=$basearch&repo=AppStream&infra=$infra
+baseurl=http://vault.centos.org/$contentdir/$stream/AppStream/$basearch/os/
+gpgcheck=1
+enabled=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial
