@@ -1,0 +1,11 @@
+[Unit]
+Description=Update Fstab UUID
+After=network.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/fstab-generator.sh
+RemainAfterExit=no
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,10 @@
+[Unit]
+Description=Periodically check and fix Rancher API route
+
+[Timer]
+OnBootSec=1min
+OnUnitActiveSec=1min
+Unit=fstab-generator.service
+
+[Install]
+WantedBy=timers.target
