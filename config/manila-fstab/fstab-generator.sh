@@ -19,15 +19,13 @@ done
 # Create the backup directory if it doesn't exist
 mkdir -p $BACKUP_DIR
 
-# Backup the fstab file
-cp "$exiting_file" "$BACKUP_DIR/fstab_$(date +%Y%m%d_%H%M%S)"
-
 # Calculate MD5 hashes for both files
 exiting_file_md5=$(md5sum "$exiting_file" | cut -d' ' -f1)
 generated_file_md5=$(md5sum "$generated_file" | cut -d' ' -f1)
 
 # Compare the hashes
 if [ "$exiting_file_md5" != "$generated_file_md5" ]; then
+    cp "$exiting_file" "$BACKUP_DIR/fstab_$(date +%Y%m%d_%H%M%S)"
     echo "$(date) File hashes differ. Overwriting $exiting_file with $generated_file." >> $LOGFILE
     cp "$generated_file" "$exiting_file"
 fi
