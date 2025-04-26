@@ -1,0 +1,12 @@
+[Unit]
+Description=Fix Rancher API route to correct gateway on boot
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/fix-rancher-api-route.sh
+RemainAfterExit=no
+
+[Install]
+WantedBy=multi-user.target

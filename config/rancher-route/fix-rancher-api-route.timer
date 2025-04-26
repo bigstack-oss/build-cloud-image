@@ -1,0 +1,10 @@
+[Unit]
+Description=Periodically check and fix Rancher API route
+
+[Timer]
+OnBootSec=1min
+OnUnitActiveSec=15s
+Unit=fix-rancher-api-route.service
+
+[Install]
+WantedBy=timers.target
