@@ -1,4 +1,4 @@
-cp ./images/ubuntu2004.qcow2 ./images/manila-service-image.qcow2
+wget http://tarballs.openstack.org/manila-image-elements/images/manila-service-image-master.qcow2 -O ./images/manila-service-image.qcow2
 sudo virt-copy-in './config/manila-fstab/fstab-generator.timer' /etc/systemd/system/ -a ./images/manila-service-image.qcow2
 sudo virt-copy-in './config/manila-fstab/fstab-generator.service' /etc/systemd/system/ -a ./images/manila-service-image.qcow2
 sudo virt-copy-in './config/manila-fstab/fstab-generator.sh' /usr/local/bin/ -a ./images/manila-service-image.qcow2
