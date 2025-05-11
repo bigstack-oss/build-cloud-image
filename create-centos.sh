@@ -29,8 +29,9 @@ sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command 'sed -i "/^GRUB_CMDL
 sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command 'grub2-mkconfig -o /boot/grub2/grub.cfg' -a ./images/centos_7.qcow2
 echo "------ disable kernel auto update ------"
 sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command "echo 'exclude=kernel* linux-firmware*' >> /etc/yum.conf" -a ./images/centos_7.qcow2
+echo "------ Sysprep ------"
 sudo LIBGUESTFS_BACKEND=direct virt-sysprep -a ./images/centos_7.qcow2
-
+echo "------ Done ------"
 
 echo "------ creating centos 8 ------"
 rm -rf ./images/centos_8.qcow2
@@ -65,6 +66,7 @@ sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command 'sed -i "/^GRUB_CMDL
 sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command 'grub2-mkconfig -o /boot/grub2/grub.cfg' -a ./images/centos_8.qcow2
 echo "------ disable kernel auto update ------"
 sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command "echo 'exclude=kernel* linux-firmware*' >> /etc/yum.conf" -a ./images/centos_8.qcow2
+echo "------ Sysprep ------"
 sudo LIBGUESTFS_BACKEND=direct virt-sysprep -a ./images/centos_8.qcow2
 echo "------ Done ------"
 
@@ -88,6 +90,7 @@ sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command 'sed -i "/^GRUB_CMDL
 sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command 'grub2-mkconfig -o /boot/grub2/grub.cfg' -a ./images/centos_9.qcow2
 echo "------ disable kernel auto update ------"
 sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command "echo 'exclude=kernel* linux-firmware*' >> /etc/yum.conf" -a ./images/centos_9.qcow2
+echo "------ Sysprep ------"
 sudo LIBGUESTFS_BACKEND=direct virt-sysprep -a ./images/centos_9.qcow2
 echo "------ Done ------"
 
@@ -111,5 +114,6 @@ sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command 'sed -i "/^GRUB_CMDL
 sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command 'grub2-mkconfig -o /boot/grub2/grub.cfg' -a ./images/centos_10.qcow2
 echo "------ disable kernel auto update ------"
 sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command "echo 'exclude=kernel* linux-firmware*' >> /etc/yum.conf" -a ./images/centos_10.qcow2
+echo "------ Sysprep ------"
 sudo LIBGUESTFS_BACKEND=direct virt-sysprep -a ./images/centos_10.qcow2
 echo "------ Done ------"

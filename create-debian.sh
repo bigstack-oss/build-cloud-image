@@ -15,6 +15,7 @@ sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/debian/cloud.cfg' /etc/clo
 sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/daemon.json' /etc/docker/ -a ./images/debian_10.qcow2
 echo "------ disable kernel auto update ------"
 sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/ubuntu/20auto-upgrades' /etc/apt/apt.conf.d/ -a ./images/debian_10.qcow2
+echo "------ Sysprep ------"
 sudo LIBGUESTFS_BACKEND=direct virt-sysprep -a ./images/debian_10.qcow2
 echo "------ Done ------"
 
@@ -34,6 +35,7 @@ sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/debian/cloud.cfg' /etc/clo
 sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/daemon.json' /etc/docker/ -a ./images/debian_11.qcow2
 echo "------ disable kernel auto update ------"
 sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/ubuntu/20auto-upgrades' /etc/apt/apt.conf.d/ -a ./images/debian_11.qcow2
+echo "------ Sysprep ------"
 sudo LIBGUESTFS_BACKEND=direct virt-sysprep -a ./images/debian_11.qcow2
 echo "------ Done ------"
 
@@ -56,5 +58,6 @@ echo "------ disable kernel auto update ------"
 sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/ubuntu/20auto-upgrades' /etc/apt/apt.conf.d/ -a ./images/debian_12.qcow2
 # echo "------ disable TCP Segmentation Offload (TSO) -----"
 # sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/98-disable-tso.cfg' /etc/cloud/cloud.cfg.d/ -a ./images/debian_12.qcow2
+echo "------ Sysprep ------"
 sudo LIBGUESTFS_BACKEND=direct virt-sysprep -a ./images/debian_12.qcow2
 echo "------ Done ------"

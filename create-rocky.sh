@@ -20,8 +20,9 @@ sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command 'sed -i "/^GRUB_CMDL
 sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command 'grub2-mkconfig -o /boot/grub2/grub.cfg' -a ./images/rocky_8.qcow2
 echo "------ disable kernel auto update ------"
 sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command "echo 'exclude=kernel* linux-firmware*' >> /etc/yum.conf" -a ./images/rocky_8.qcow2
+echo "------ Sysprep ------"
 sudo LIBGUESTFS_BACKEND=direct virt-sysprep -a ./images/rocky_8.qcow2
-
+echo "------ Done ------"
 
 echo "------ creating Rocky 9 ------"
 rm -rf ./images/rocky_9.qcow2
@@ -43,6 +44,6 @@ sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command 'sed -i "/^GRUB_CMDL
 sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command 'grub2-mkconfig -o /boot/grub2/grub.cfg' -a ./images/rocky_9.qcow2
 echo "------ disable kernel auto update ------"
 sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command "echo 'exclude=kernel* linux-firmware*' >> /etc/yum.conf" -a ./images/rocky_9.qcow2
+echo "------ Sysprep ------"
 sudo LIBGUESTFS_BACKEND=direct virt-sysprep -a ./images/rocky_9.qcow2
-
 echo "------ Done ------"

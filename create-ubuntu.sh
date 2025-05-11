@@ -15,8 +15,9 @@ sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/ubuntu/cloud.cfg' /etc/clo
 sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/daemon.json' /etc/docker/ -a ./images/ubuntu_2004.qcow2
 echo "------ disable kernel auto update ------"
 sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/ubuntu/20auto-upgrades' /etc/apt/apt.conf.d/ -a ./images/ubuntu_2004.qcow2
-echo "------ prepare disk ------"
+echo "------ Sysprep ------"
 sudo LIBGUESTFS_BACKEND=direct virt-sysprep -a ./images/ubuntu_2004.qcow2
+echo "------ Done ------"
 
 echo "------ creating ubuntu 22.04 LTS ------"
 rm -rf ./images/ubuntu_2204.qcow2
@@ -34,7 +35,9 @@ sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/ubuntu/cloud.cfg' /etc/clo
 sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/daemon.json' /etc/docker/ -a ./images/ubuntu_2204.qcow2
 echo "------ disable kernel auto update ------"
 sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/ubuntu/20auto-upgrades' /etc/apt/apt.conf.d/ -a ./images/ubuntu_2204.qcow2
+echo "------ Sysprep ------"
 sudo LIBGUESTFS_BACKEND=direct virt-sysprep -a ./images/ubuntu_2204.qcow2
+echo "------ Done ------"
 
 echo "------ creating ubuntu 24.04 LTS ------"
 rm -rf ./images/ubuntu_2404.qcow2
@@ -52,6 +55,6 @@ sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/ubuntu/cloud.cfg' /etc/clo
 sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/daemon.json' /etc/docker/ -a ./images/ubuntu_2404.qcow2
 echo "------ disable kernel auto update ------"
 sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/ubuntu/20auto-upgrades' /etc/apt/apt.conf.d/ -a ./images/ubuntu_2404.qcow2
+echo "------ Sysprep ------"
 sudo LIBGUESTFS_BACKEND=direct virt-sysprep -a ./images/ubuntu_2404.qcow2
-
 echo "------ Done ------"
