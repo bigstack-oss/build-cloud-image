@@ -2,7 +2,7 @@
 #!/bin/bash
 echo "------ creating centos 7 ------"
 rm -rf ./images/centos_7.qcow2
-wget https://cloud.centos.org/centos/7/images/CentOS7-x86_64-GenericCloud.qcow2 -O ./images/centos_7.qcow2
+wget https://cloud.centos.org/centos/7/images/CentOS-7-x86_64-GenericCloud.qcow2 -O ./images/centos_7.qcow2
 echo "------ customize settings ------"
 sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command "mkdir /etc/docker" -a ./images/centos_7.qcow2
 cp ./config/centos/getty-c7 ./config/centos/getty@tty1.service
