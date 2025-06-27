@@ -47,3 +47,27 @@ sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command "echo 'exclude=kerne
 echo "------ Sysprep ------"
 sudo LIBGUESTFS_BACKEND=direct virt-sysprep -a ./images/rocky_9.qcow2
 echo "------ Done ------"
+
+echo "------ creating Rocky 10 ------"
+rm -rf ./images/rocky_10.qcow2
+wget https://download.rockylinux.org/pub/rocky/10/images/x86_64/Rocky-10-GenericCloud.latest.x86_64.qcow2 -O ./images/rocky_10.qcow2
+echo "------ install pkg ------"
+sudo LIBGUESTFS_BACKEND=direct virt-customize --install nfs-utils --selinux-relabel -a ./images/rocky_10.qcow2
+sudo LIBGUESTFS_BACKEND=direct virt-customize --install cifs-utils --selinux-relabel -a ./images/rocky_10.qcow2
+sudo LIBGUESTFS_BACKEND=direct virt-customize --install qemu-guest-agent --selinux-relabel -a ./images/rocky_10.qcow2
+echo "------ customize settings ------"
+sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command "mkdir /etc/docker" -a ./images/rocky_10.qcow2
+cp ./config/rocky/getty-r10 ./config/rocky/getty@tty1.service
+cp ./config/rocky/cloud-r10.cfg ./config/rocky/cloud.cfg
+sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/rocky/getty@tty1.service' /lib/systemd/system/ -a ./images/rocky_10.qcow2
+sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/rocky/cloud.cfg' /etc/cloud/ -a ./images/rocky_10.qcow2
+sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/daemon.json' /etc/docker/ -a ./images/rocky_10.qcow2
+sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command 'sed -i "s/^SELINUX=enforcing/SELINUX=permissive/" /etc/selinux/config' -a ./images/rocky_10.qcow2
+echo "------ disable edd ------"
+sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command 'sed -i "/^GRUB_CMDLINE_LINUX=/ s/\"$/ edd=off\"/" /etc/default/grub' -a ./images/rocky_10.qcow2
+sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command 'grub2-mkconfig -o /boot/grub2/grub.cfg' -a ./images/rocky_10.qcow2
+echo "------ disable kernel auto update ------"
+sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command "echo 'exclude=kernel* linux-firmware*' >> /etc/yum.conf" -a ./images/rocky_10.qcow2
+echo "------ Sysprep ------"
+sudo LIBGUESTFS_BACKEND=direct virt-sysprep -a ./images/rocky_10.qcow2
+echo "------ Done ------"
