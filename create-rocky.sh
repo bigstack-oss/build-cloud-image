@@ -2,7 +2,7 @@
 
 echo "------ creating Rocky 8 ------"
 rm -rf ./images/rocky_8.qcow2
-wget https://download.rockylinux.org/pub/rocky/8/images/x86_64/Rocky-8-GenericCloud.latest.x86_64.qcow2 -O ./images/rocky_8.qcow2
+wget https://dl.rockylinux.org/pub/rocky/8/images/x86_64/Rocky-8-GenericCloud.latest.x86_64.qcow2 -O ./images/rocky_8.qcow2
 echo "------ install pkg ------"
 sudo LIBGUESTFS_BACKEND=direct virt-customize --install nfs-utils --selinux-relabel -a ./images/rocky_8.qcow2
 sudo LIBGUESTFS_BACKEND=direct virt-customize --install cifs-utils --selinux-relabel -a ./images/rocky_8.qcow2
@@ -26,7 +26,7 @@ echo "------ Done ------"
 
 echo "------ creating Rocky 9 ------"
 rm -rf ./images/rocky_9.qcow2
-wget https://download.rockylinux.org/pub/rocky/9/images/x86_64/Rocky-9-GenericCloud.latest.x86_64.qcow2 -O ./images/rocky_9.qcow2
+wget https://dl.rockylinux.org/pub/rocky/9/images/x86_64/Rocky-9-GenericCloud.latest.x86_64.qcow2 -O ./images/rocky_9.qcow2
 echo "------ install pkg ------"
 sudo LIBGUESTFS_BACKEND=direct virt-customize --install nfs-utils --selinux-relabel -a ./images/rocky_9.qcow2
 sudo LIBGUESTFS_BACKEND=direct virt-customize --install cifs-utils --selinux-relabel -a ./images/rocky_9.qcow2
@@ -50,7 +50,7 @@ echo "------ Done ------"
 
 echo "------ creating Rocky 10 ------"
 rm -rf ./images/rocky_10.qcow2
-wget https://download.rockylinux.org/pub/rocky/10/images/x86_64/Rocky-10-GenericCloud.latest.x86_64.qcow2 -O ./images/rocky_10.qcow2
+wget https://dl.rockylinux.org/pub/rocky/10/images/x86_64/Rocky-10-GenericCloud-Base.latest.x86_64.qcow2 -O ./images/rocky_10.qcow2
 echo "------ install pkg ------"
 sudo LIBGUESTFS_BACKEND=direct virt-customize --install nfs-utils --selinux-relabel -a ./images/rocky_10.qcow2
 sudo LIBGUESTFS_BACKEND=direct virt-customize --install cifs-utils --selinux-relabel -a ./images/rocky_10.qcow2
