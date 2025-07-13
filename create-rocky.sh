@@ -39,7 +39,7 @@ sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command "mkdir /etc/docker" 
 cp ./config/rocky/getty-r9 ./config/rocky/getty@tty1.service
 cp ./config/rocky/cloud-r9.cfg ./config/rocky/cloud.cfg
 sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/rocky/getty@tty1.service' /lib/systemd/system/ -a ./images/rocky_9.qcow2
-sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/rocky/cloud.cfg'   -a ./images/rocky_9.qcow2
+sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/rocky/cloud.cfg' /etc/cloud/ -a ./images/rocky_9.qcow2
 sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/daemon.json' /etc/docker/ -a ./images/rocky_9.qcow2
 sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command 'sed -i "s/^SELINUX=enforcing/SELINUX=permissive/" /etc/selinux/config' -a ./images/rocky_9.qcow2
 echo "------ update ------"
