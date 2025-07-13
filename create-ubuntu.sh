@@ -33,6 +33,8 @@ cp ./config/ubuntu/cloud-u22.cfg ./config/ubuntu/cloud.cfg
 sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/ubuntu/getty@tty1.service' /lib/systemd/system/ -a ./images/ubuntu_22.04.qcow2
 sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/ubuntu/cloud.cfg' /etc/cloud/ -a ./images/ubuntu_22.04.qcow2
 sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/daemon.json' /etc/docker/ -a ./images/ubuntu_22.04.qcow2
+echo "------ CVE fix ------"
+sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command "apt install --only-upgrade openssh-client openssh-server -y sudo" -a ./images/ubuntu_22.04.qcow2
 echo "------ disable kernel auto update ------"
 sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/ubuntu/20auto-upgrades' /etc/apt/apt.conf.d/ -a ./images/ubuntu_22.04.qcow2
 echo "------ Sysprep ------"
@@ -53,6 +55,8 @@ cp ./config/ubuntu/cloud-u24.cfg ./config/ubuntu/cloud.cfg
 sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/ubuntu/getty@tty1.service' /lib/systemd/system/ -a ./images/ubuntu_24.04.qcow2
 sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/ubuntu/cloud.cfg' /etc/cloud/ -a ./images/ubuntu_24.04.qcow2
 sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/daemon.json' /etc/docker/ -a ./images/ubuntu_24.04.qcow2
+echo "------ CVE fix ------"
+sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command "apt install --only-upgrade openssh-client openssh-server -y sudo" -a ./images/ubuntu_24.04.qcow2
 echo "------ disable kernel auto update ------"
 sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/ubuntu/20auto-upgrades' /etc/apt/apt.conf.d/ -a ./images/ubuntu_24.04.qcow2
 echo "------ Sysprep ------"
