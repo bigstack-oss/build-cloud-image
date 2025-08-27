@@ -15,12 +15,6 @@ sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/rocky/getty@tty1.service' 
 sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/rocky/cloud.cfg' /etc/cloud/ -a ./images/rocky_8.qcow2
 sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/daemon.json' /etc/docker/ -a ./images/rocky_8.qcow2
 sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command 'sed -i "s/^SELINUX=enforcing/SELINUX=permissive/" /etc/selinux/config' -a ./images/rocky_8.qcow2
-echo "------ update ------"
-sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command 'dnf update -y' -a ./images/rocky_8.qcow2
-sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command 'dnf clean all' -a ./images/rocky_8.qcow2
-echo "------ disable edd ------"
-sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command 'sed -i "/^GRUB_CMDLINE_LINUX=/ s/\"$/ edd=off\"/" /etc/default/grub' -a ./images/rocky_8.qcow2
-sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command 'grub2-mkconfig -o /boot/grub2/grub.cfg' -a ./images/rocky_8.qcow2
 echo "------ disable kernel auto update ------"
 sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command "echo 'exclude=kernel* linux-firmware*' >> /etc/yum.conf" -a ./images/rocky_8.qcow2
 echo "------ Sysprep ------"
@@ -42,12 +36,6 @@ sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/rocky/getty@tty1.service' 
 sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/rocky/cloud.cfg' /etc/cloud/ -a ./images/rocky_9.qcow2
 sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/daemon.json' /etc/docker/ -a ./images/rocky_9.qcow2
 sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command 'sed -i "s/^SELINUX=enforcing/SELINUX=permissive/" /etc/selinux/config' -a ./images/rocky_9.qcow2
-echo "------ update ------"
-sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command 'dnf update -y' -a ./images/rocky_9.qcow2
-sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command 'dnf clean all' -a ./images/rocky_9.qcow2
-echo "------ disable edd ------"
-sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command 'sed -i "/^GRUB_CMDLINE_LINUX=/ s/\"$/ edd=off\"/" /etc/default/grub' -a ./images/rocky_9.qcow2
-sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command 'grub2-mkconfig -o /boot/grub2/grub.cfg' -a ./images/rocky_9.qcow2
 echo "------ disable kernel auto update ------"
 sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command "echo 'exclude=kernel* linux-firmware*' >> /etc/yum.conf" -a ./images/rocky_9.qcow2
 echo "------ Sysprep ------"
@@ -69,12 +57,6 @@ sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/rocky/getty@tty1.service' 
 sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/rocky/cloud.cfg' /etc/cloud/ -a ./images/rocky_10.qcow2
 sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/daemon.json' /etc/docker/ -a ./images/rocky_10.qcow2
 sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command 'sed -i "s/^SELINUX=enforcing/SELINUX=permissive/" /etc/selinux/config' -a ./images/rocky_10.qcow2
-echo "------ update ------"
-sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command 'dnf update -y' -a ./images/rocky_10.qcow2
-sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command 'dnf clean all' -a ./images/rocky_10.qcow2
-echo "------ disable edd ------"
-sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command 'sed -i "/^GRUB_CMDLINE_LINUX=/ s/\"$/ edd=off\"/" /etc/default/grub' -a ./images/rocky_10.qcow2
-sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command 'grub2-mkconfig -o /boot/grub2/grub.cfg' -a ./images/rocky_10.qcow2
 echo "------ disable kernel auto update ------"
 sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command "echo 'exclude=kernel* linux-firmware*' >> /etc/yum.conf" -a ./images/rocky_10.qcow2
 echo "------ Sysprep ------"
