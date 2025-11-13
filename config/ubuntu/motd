@@ -1,0 +1,24 @@
+**********************************************************************
+***  NOTICE: Kernel Auto-Update DISABLED by Default                ***
+**********************************************************************
+To ensure system stability and compatibility with kernel-dependent
+modules and drivers, automatic kernel updates are DISABLED by default.
+
+If you wish to enable automatic kernel updates, please follow the
+instructions below for your operating system:
+─────────────────────────────
+1. Edit the file:
+   /etc/apt/apt.conf.d/20auto-upgrades
+
+2. Remove or comment out the following block:
+   Unattended-Upgrade::Package-Blacklist {
+       "linux-image-*";
+       "linux-headers-*";
+       "linux-modules-*";
+       "linux-modules-extra-*";
+   };
+─────────────────────────────
+NOTE:
+After enabling kernel auto-updates, a system reboot may be required
+to apply the new kernel version.
+**********************************************************************
