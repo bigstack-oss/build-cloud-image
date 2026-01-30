@@ -15,9 +15,9 @@ sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/rocky/getty@tty1.service' 
 sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/rocky/cloud.cfg' /etc/cloud/ -a ./images/rocky_8.qcow2
 sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/daemon.json' /etc/docker/ -a ./images/rocky_8.qcow2
 sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command 'sed -i "s/^SELINUX=enforcing/SELINUX=permissive/" /etc/selinux/config' -a ./images/rocky_8.qcow2
-echo "------ disable kernel auto update ------"
-sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command "echo 'exclude=kernel* linux-firmware*' >> /etc/yum.conf" -a ./images/rocky_8.qcow2
-sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/rocky/motd' /etc/ -a ./images/rocky_8.qcow2
+# echo "------ disable kernel auto update ------"
+# sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command "echo 'exclude=kernel* linux-firmware*' >> /etc/yum.conf" -a ./images/rocky_8.qcow2
+# sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/rocky/motd' /etc/ -a ./images/rocky_8.qcow2
 echo "------ Sysprep ------"
 sudo LIBGUESTFS_BACKEND=direct virt-sysprep -a ./images/rocky_8.qcow2
 echo "------ Done ------"
@@ -37,9 +37,9 @@ sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/rocky/getty@tty1.service' 
 sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/rocky/cloud.cfg' /etc/cloud/ -a ./images/rocky_9.qcow2
 sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/daemon.json' /etc/docker/ -a ./images/rocky_9.qcow2
 sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command 'sed -i "s/^SELINUX=enforcing/SELINUX=permissive/" /etc/selinux/config' -a ./images/rocky_9.qcow2
-echo "------ disable kernel auto update ------"
-sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command "echo 'exclude=kernel* linux-firmware*' >> /etc/yum.conf" -a ./images/rocky_9.qcow2
-sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/rocky/motd' /etc/ -a ./images/rocky_9.qcow2
+# echo "------ disable kernel auto update ------"
+# sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command "echo 'exclude=kernel* linux-firmware*' >> /etc/yum.conf" -a ./images/rocky_9.qcow2
+# sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/rocky/motd' /etc/ -a ./images/rocky_9.qcow2
 echo "------ Sysprep ------"
 sudo LIBGUESTFS_BACKEND=direct virt-sysprep -a ./images/rocky_9.qcow2
 echo "------ Done ------"
@@ -59,9 +59,9 @@ sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/rocky/getty@tty1.service' 
 sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/rocky/cloud.cfg' /etc/cloud/ -a ./images/rocky_10.qcow2
 sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/daemon.json' /etc/docker/ -a ./images/rocky_10.qcow2
 sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command 'sed -i "s/^SELINUX=enforcing/SELINUX=permissive/" /etc/selinux/config' -a ./images/rocky_10.qcow2
-echo "------ disable kernel auto update ------"
-sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command "echo 'exclude=kernel* linux-firmware*' >> /etc/yum.conf" -a ./images/rocky_10.qcow2
-sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/rocky/motd' /etc/ -a ./images/rocky_10.qcow2
+# echo "------ disable kernel auto update ------"
+# sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command "echo 'exclude=kernel* linux-firmware*' >> /etc/yum.conf" -a ./images/rocky_10.qcow2
+# sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/rocky/motd' /etc/ -a ./images/rocky_10.qcow2
 echo "------ Sysprep ------"
 sudo LIBGUESTFS_BACKEND=direct virt-sysprep -a ./images/rocky_10.qcow2
 echo "------ Done ------"

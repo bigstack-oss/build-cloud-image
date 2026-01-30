@@ -1,0 +1,9 @@
+APT::Periodic::Update-Package-Lists "1";
+APT::Periodic::Unattended-Upgrade "0";
+
+Unattended-Upgrade::Package-Blacklist {
+    "linux-image-*";
+    "linux-headers-*";
+    "linux-modules-*";
+    "linux-modules-extra-*";
+};

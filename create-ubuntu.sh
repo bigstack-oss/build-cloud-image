@@ -43,7 +43,7 @@ sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/ubuntu/cloud.cfg' /etc/clo
 sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/daemon.json' /etc/docker/ -a ./images/ubuntu_22.04.qcow2
 echo "------ disable kernel auto update ------"
 sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/ubuntu/20auto-upgrades' /etc/apt/apt.conf.d/ -a ./images/ubuntu_22.04.qcow2
-sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/ubuntu/motd' /etc/ -a ./images/ubuntu_22.04.qcow2
+# sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/ubuntu/motd' /etc/ -a ./images/ubuntu_22.04.qcow2
 echo "------ Network Interfaces ------"
 sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/ubuntu/99-new-interface-dhcp.yaml' /etc/netplan/ -a ./images/ubuntu_22.04.qcow2
 sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command "chmod 600 /etc/netplan/99-new-interface-dhcp.yaml" -a ./images/ubuntu_22.04.qcow2
@@ -71,7 +71,7 @@ sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/ubuntu/cloud.cfg' /etc/clo
 sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/daemon.json' /etc/docker/ -a ./images/ubuntu_24.04.qcow2
 echo "------ disable kernel auto update ------"
 sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/ubuntu/20auto-upgrades' /etc/apt/apt.conf.d/ -a ./images/ubuntu_24.04.qcow2
-sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/ubuntu/motd' /etc/ -a ./images/ubuntu_24.04.qcow2
+# sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/ubuntu/motd' /etc/ -a ./images/ubuntu_24.04.qcow2
 echo "------ Network Interfaces ------"
 sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/ubuntu/99-new-interface-dhcp.yaml' /etc/netplan/ -a ./images/ubuntu_24.04.qcow2
 sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command "chmod 600 /etc/netplan/99-new-interface-dhcp.yaml" -a ./images/ubuntu_24.04.qcow2
