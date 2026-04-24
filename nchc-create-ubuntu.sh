@@ -30,3 +30,16 @@ echo "------ prepare disk ------"
 sudo LIBGUESTFS_BACKEND=direct virt-sysprep -a ./images/ubuntu_24.04-nchc.qcow2
 
 echo "------ Done ------"
+
+
+echo "------ creating ubuntu 26.04 LTS ------"
+cp ./images/ubuntu_26.04.qcow2 ./images/ubuntu_26.04-nchc.qcow2
+echo "------ remove auto-login ------"
+sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command "rm -rf /lib/systemd/system/getty@tty1.service" -a ./images/ubuntu_26.04-nchc.qcow2
+echo "------ use nchc repo ------"
+cp ./nchc/ubuntu/cloud.cfg-u26 ./nchc/ubuntu/cloud.cfg
+sudo LIBGUESTFS_BACKEND=direct virt-copy-in './nchc/ubuntu/cloud.cfg' /etc/cloud/ -a ./images/ubuntu_26.04-nchc.qcow2
+echo "------ prepare disk ------"
+sudo LIBGUESTFS_BACKEND=direct virt-sysprep -a ./images/ubuntu_26.04-nchc.qcow2
+
+echo "------ Done ------"
