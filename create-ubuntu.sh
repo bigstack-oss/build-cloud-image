@@ -34,6 +34,8 @@ sudo LIBGUESTFS_BACKEND=direct virt-customize   --run-command 'apt-get update' \
 sudo LIBGUESTFS_BACKEND=direct virt-customize --install nfs-common --selinux-relabel -a ./images/ubuntu_22.04.qcow2
 sudo LIBGUESTFS_BACKEND=direct virt-customize --install cifs-utils --selinux-relabel -a ./images/ubuntu_22.04.qcow2
 sudo LIBGUESTFS_BACKEND=direct virt-customize --install qemu-guest-agent --selinux-relabel -a ./images/ubuntu_22.04.qcow2
+sudo LIBGUESTFS_BACKEND=direct virt-customize --install net-tools --selinux-relabel -a ./images/ubuntu_22.04.qcow2
+
 echo "------ customize settings ------"
 sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command "mkdir /etc/docker" -a ./images/ubuntu_22.04.qcow2
 cp ./config/ubuntu/getty-u22 ./config/ubuntu/getty@tty1.service
@@ -62,6 +64,8 @@ sudo LIBGUESTFS_BACKEND=direct virt-customize   --run-command 'apt-get update' \
 sudo LIBGUESTFS_BACKEND=direct virt-customize --install nfs-common --selinux-relabel -a ./images/ubuntu_24.04.qcow2
 sudo LIBGUESTFS_BACKEND=direct virt-customize --install cifs-utils --selinux-relabel -a ./images/ubuntu_24.04.qcow2
 sudo LIBGUESTFS_BACKEND=direct virt-customize --install qemu-guest-agent --selinux-relabel -a ./images/ubuntu_24.04.qcow2
+sudo LIBGUESTFS_BACKEND=direct virt-customize --install net-tools --selinux-relabel -a ./images/ubuntu_24.04.qcow2
+
 echo "------ customize settings ------"
 sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command "mkdir /etc/docker" -a ./images/ubuntu_24.04.qcow2
 cp ./config/ubuntu/getty-u24 ./config/ubuntu/getty@tty1.service
@@ -90,6 +94,8 @@ sudo LIBGUESTFS_BACKEND=direct virt-customize   --run-command 'apt-get update' \
 sudo LIBGUESTFS_BACKEND=direct virt-customize --install nfs-common --selinux-relabel -a ./images/ubuntu_26.04.qcow2
 sudo LIBGUESTFS_BACKEND=direct virt-customize --install cifs-utils --selinux-relabel -a ./images/ubuntu_26.04.qcow2
 sudo LIBGUESTFS_BACKEND=direct virt-customize --install qemu-guest-agent --selinux-relabel -a ./images/ubuntu_26.04.qcow2
+sudo LIBGUESTFS_BACKEND=direct virt-customize --install net-tools --selinux-relabel -a ./images/ubuntu_26.04.qcow2
+
 echo "------ customize settings ------"
 sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command "mkdir /etc/docker" -a ./images/ubuntu_26.04.qcow2
 cp ./config/ubuntu/getty-u26 ./config/ubuntu/getty@tty1.service
