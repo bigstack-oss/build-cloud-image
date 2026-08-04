@@ -15,6 +15,11 @@ sudo LIBGUESTFS_BACKEND=direct virt-customize --install nfs-common --selinux-rel
 sudo LIBGUESTFS_BACKEND=direct virt-customize --install cifs-utils --selinux-relabel -a ./images/ubuntu_22.04.qcow2
 sudo LIBGUESTFS_BACKEND=direct virt-customize --install qemu-guest-agent --selinux-relabel -a ./images/ubuntu_22.04.qcow2
 sudo LIBGUESTFS_BACKEND=direct virt-customize --install net-tools --selinux-relabel -a ./images/ubuntu_22.04.qcow2
+sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command "systemctl stop systemd-resolved" -a ./images/ubuntu_22.04.qcow2
+sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command "systemctl disable systemd-resolved" -a ./images/ubuntu_22.04.qcow2
+sudo LIBGUESTFS_BACKEND=direct virt-customize --uninstall systemd-resolved -a ./images/ubuntu_22.04.qcow2
+sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command "rm -f /etc/resolv.conf" -a ./images/ubuntu_22.04.qcow2
+sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/ubuntu/resolv.conf' /etc/ -a ./images/ubuntu_22.04.qcow2
 
 echo "------ customize settings ------"
 sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command "mkdir /etc/docker" -a ./images/ubuntu_22.04.qcow2
@@ -49,6 +54,11 @@ sudo LIBGUESTFS_BACKEND=direct virt-customize --install nfs-common --selinux-rel
 sudo LIBGUESTFS_BACKEND=direct virt-customize --install cifs-utils --selinux-relabel -a ./images/ubuntu_24.04.qcow2
 sudo LIBGUESTFS_BACKEND=direct virt-customize --install qemu-guest-agent --selinux-relabel -a ./images/ubuntu_24.04.qcow2
 sudo LIBGUESTFS_BACKEND=direct virt-customize --install net-tools --selinux-relabel -a ./images/ubuntu_24.04.qcow2
+sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command "systemctl stop systemd-resolved" -a ./images/ubuntu_24.04.qcow2
+sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command "systemctl disable systemd-resolved" -a ./images/ubuntu_24.04.qcow2
+sudo LIBGUESTFS_BACKEND=direct virt-customize --uninstall systemd-resolved -a ./images/ubuntu_24.04.qcow2
+sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command "rm -f /etc/resolv.conf" -a ./images/ubuntu_24.04.qcow2
+sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/ubuntu/resolv.conf' /etc/ -a ./images/ubuntu_24.04.qcow2
 
 echo "------ customize settings ------"
 sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command "mkdir /etc/docker" -a ./images/ubuntu_24.04.qcow2
@@ -83,6 +93,11 @@ sudo LIBGUESTFS_BACKEND=direct virt-customize --install nfs-common --selinux-rel
 sudo LIBGUESTFS_BACKEND=direct virt-customize --install cifs-utils --selinux-relabel -a ./images/ubuntu_26.04.qcow2
 sudo LIBGUESTFS_BACKEND=direct virt-customize --install qemu-guest-agent --selinux-relabel -a ./images/ubuntu_26.04.qcow2
 sudo LIBGUESTFS_BACKEND=direct virt-customize --install net-tools --selinux-relabel -a ./images/ubuntu_26.04.qcow2
+sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command "systemctl stop systemd-resolved" -a ./images/ubuntu_26.04.qcow2
+sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command "systemctl disable systemd-resolved" -a ./images/ubuntu_26.04.qcow2
+sudo LIBGUESTFS_BACKEND=direct virt-customize --uninstall systemd-resolved -a ./images/ubuntu_26.04.qcow2
+sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command "rm -f /etc/resolv.conf" -a ./images/ubuntu_26.04.qcow2
+sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/ubuntu/resolv.conf' /etc/ -a ./images/ubuntu_26.04.qcow2
 
 echo "------ customize settings ------"
 sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command "mkdir /etc/docker" -a ./images/ubuntu_26.04.qcow2
