@@ -19,7 +19,19 @@ sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command "systemctl stop syst
 sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command "systemctl disable systemd-resolved" -a ./images/ubuntu_22.04.qcow2
 sudo LIBGUESTFS_BACKEND=direct virt-customize --uninstall systemd-resolved -a ./images/ubuntu_22.04.qcow2
 sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command "rm -f /etc/resolv.conf" -a ./images/ubuntu_22.04.qcow2
-sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/ubuntu/resolv.conf' /etc/ -a ./images/ubuntu_22.04.qcow2
+echo "------ dynamic DNS via NetworkManager (no systemd-resolved) ------"
+sudo LIBGUESTFS_BACKEND=direct virt-customize --install network-manager --selinux-relabel -a ./images/ubuntu_22.04.qcow2
+sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command "systemctl enable NetworkManager" -a ./images/ubuntu_22.04.qcow2
+# Ubuntu's network-manager package ships /usr/lib/NetworkManager/conf.d/10-dns-resolved.conf
+# forcing dns=systemd-resolved; since resolved is removed, NM would never write /etc/resolv.conf.
+# Shadow it (same basename, higher-priority /etc dir) so NM falls back to writing
+# /etc/resolv.conf directly from whatever DNS the DHCP lease provides (OVN subnet DNS).
+sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/ubuntu/10-dns-resolved.conf' /etc/NetworkManager/conf.d/ -a ./images/ubuntu_22.04.qcow2
+# NM's dns-mgr still unconditionally also tries the "systemd-resolved" plugin (Ubuntu
+# compiles it in as a fallback candidate) which fails because /run/systemd/resolve no
+# longer exists once resolved is removed, aborting the whole DNS commit. Recreate that
+# dir every boot via tmpfiles.d so the plugin no-ops instead of failing the commit.
+sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/ubuntu/dns-resolve-dir.conf' /etc/tmpfiles.d/ -a ./images/ubuntu_22.04.qcow2
 
 echo "------ customize settings ------"
 sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command "mkdir /etc/docker" -a ./images/ubuntu_22.04.qcow2
@@ -32,8 +44,16 @@ echo "------ disable kernel auto update ------"
 sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/ubuntu/20auto-upgrades' /etc/apt/apt.conf.d/ -a ./images/ubuntu_22.04.qcow2
 # sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/ubuntu/motd' /etc/ -a ./images/ubuntu_22.04.qcow2
 echo "------ Network Interfaces ------"
-sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/ubuntu/99-new-interface-dhcp.yaml' /etc/netplan/ -a ./images/ubuntu_22.04.qcow2
-sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command "chmod 600 /etc/netplan/99-new-interface-dhcp.yaml" -a ./images/ubuntu_22.04.qcow2
+sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command "rm -f /etc/netplan/*.yaml" -a ./images/ubuntu_22.04.qcow2
+sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/ubuntu/99-network-manager.yaml' /etc/netplan/ -a ./images/ubuntu_22.04.qcow2
+sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command "chmod 600 /etc/netplan/99-network-manager.yaml" -a ./images/ubuntu_22.04.qcow2
+# networkd no longer manages any interface (NetworkManager does); leaving
+# systemd-networkd-wait-online.service enabled hangs boot forever waiting for a
+# network networkd never brings up. Mask it and let NetworkManager-wait-online
+# satisfy network-online.target instead.
+sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command "systemctl disable systemd-networkd.service" -a ./images/ubuntu_22.04.qcow2
+sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command "systemctl mask systemd-networkd-wait-online.service" -a ./images/ubuntu_22.04.qcow2
+sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command "systemctl enable NetworkManager-wait-online.service" -a ./images/ubuntu_22.04.qcow2
 echo "------ Sysprep ------"
 sudo LIBGUESTFS_BACKEND=direct virt-sysprep -a ./images/ubuntu_22.04.qcow2
 echo "------ Done ------"
@@ -58,7 +78,11 @@ sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command "systemctl stop syst
 sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command "systemctl disable systemd-resolved" -a ./images/ubuntu_24.04.qcow2
 sudo LIBGUESTFS_BACKEND=direct virt-customize --uninstall systemd-resolved -a ./images/ubuntu_24.04.qcow2
 sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command "rm -f /etc/resolv.conf" -a ./images/ubuntu_24.04.qcow2
-sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/ubuntu/resolv.conf' /etc/ -a ./images/ubuntu_24.04.qcow2
+echo "------ dynamic DNS via NetworkManager (no systemd-resolved) ------"
+sudo LIBGUESTFS_BACKEND=direct virt-customize --install network-manager --selinux-relabel -a ./images/ubuntu_24.04.qcow2
+sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command "systemctl enable NetworkManager" -a ./images/ubuntu_24.04.qcow2
+sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/ubuntu/10-dns-resolved.conf' /etc/NetworkManager/conf.d/ -a ./images/ubuntu_24.04.qcow2
+sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/ubuntu/dns-resolve-dir.conf' /etc/tmpfiles.d/ -a ./images/ubuntu_24.04.qcow2
 
 echo "------ customize settings ------"
 sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command "mkdir /etc/docker" -a ./images/ubuntu_24.04.qcow2
@@ -71,8 +95,12 @@ echo "------ disable kernel auto update ------"
 sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/ubuntu/20auto-upgrades' /etc/apt/apt.conf.d/ -a ./images/ubuntu_24.04.qcow2
 # sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/ubuntu/motd' /etc/ -a ./images/ubuntu_24.04.qcow2
 echo "------ Network Interfaces ------"
-sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/ubuntu/99-new-interface-dhcp.yaml' /etc/netplan/ -a ./images/ubuntu_24.04.qcow2
-sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command "chmod 600 /etc/netplan/99-new-interface-dhcp.yaml" -a ./images/ubuntu_24.04.qcow2
+sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command "rm -f /etc/netplan/*.yaml" -a ./images/ubuntu_24.04.qcow2
+sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/ubuntu/99-network-manager.yaml' /etc/netplan/ -a ./images/ubuntu_24.04.qcow2
+sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command "chmod 600 /etc/netplan/99-network-manager.yaml" -a ./images/ubuntu_24.04.qcow2
+sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command "systemctl disable systemd-networkd.service" -a ./images/ubuntu_24.04.qcow2
+sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command "systemctl mask systemd-networkd-wait-online.service" -a ./images/ubuntu_24.04.qcow2
+sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command "systemctl enable NetworkManager-wait-online.service" -a ./images/ubuntu_24.04.qcow2
 echo "------ Sysprep ------"
 sudo LIBGUESTFS_BACKEND=direct virt-sysprep -a ./images/ubuntu_24.04.qcow2
 echo "------ Done ------"
@@ -97,7 +125,11 @@ sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command "systemctl stop syst
 sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command "systemctl disable systemd-resolved" -a ./images/ubuntu_26.04.qcow2
 sudo LIBGUESTFS_BACKEND=direct virt-customize --uninstall systemd-resolved -a ./images/ubuntu_26.04.qcow2
 sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command "rm -f /etc/resolv.conf" -a ./images/ubuntu_26.04.qcow2
-sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/ubuntu/resolv.conf' /etc/ -a ./images/ubuntu_26.04.qcow2
+echo "------ dynamic DNS via NetworkManager (no systemd-resolved) ------"
+sudo LIBGUESTFS_BACKEND=direct virt-customize --install network-manager --selinux-relabel -a ./images/ubuntu_26.04.qcow2
+sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command "systemctl enable NetworkManager" -a ./images/ubuntu_26.04.qcow2
+sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/ubuntu/10-dns-resolved.conf' /etc/NetworkManager/conf.d/ -a ./images/ubuntu_26.04.qcow2
+sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/ubuntu/dns-resolve-dir.conf' /etc/tmpfiles.d/ -a ./images/ubuntu_26.04.qcow2
 
 echo "------ customize settings ------"
 sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command "mkdir /etc/docker" -a ./images/ubuntu_26.04.qcow2
@@ -110,8 +142,12 @@ echo "------ disable kernel auto update ------"
 sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/ubuntu/20auto-upgrades' /etc/apt/apt.conf.d/ -a ./images/ubuntu_26.04.qcow2
 # sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/ubuntu/motd' /etc/ -a ./images/ubuntu_26.04.qcow2
 echo "------ Network Interfaces ------"
-sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/ubuntu/99-new-interface-dhcp.yaml' /etc/netplan/ -a ./images/ubuntu_26.04.qcow2
-sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command "chmod 600 /etc/netplan/99-new-interface-dhcp.yaml" -a ./images/ubuntu_26.04.qcow2
+sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command "rm -f /etc/netplan/*.yaml" -a ./images/ubuntu_26.04.qcow2
+sudo LIBGUESTFS_BACKEND=direct virt-copy-in './config/ubuntu/99-network-manager.yaml' /etc/netplan/ -a ./images/ubuntu_26.04.qcow2
+sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command "chmod 600 /etc/netplan/99-network-manager.yaml" -a ./images/ubuntu_26.04.qcow2
+sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command "systemctl disable systemd-networkd.service" -a ./images/ubuntu_26.04.qcow2
+sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command "systemctl mask systemd-networkd-wait-online.service" -a ./images/ubuntu_26.04.qcow2
+sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command "systemctl enable NetworkManager-wait-online.service" -a ./images/ubuntu_26.04.qcow2
 echo "------ Sysprep ------"
 sudo LIBGUESTFS_BACKEND=direct virt-sysprep -a ./images/ubuntu_26.04.qcow2
 echo "------ Done ------"
