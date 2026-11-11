@@ -1,45 +1,20 @@
 #!/bin/bash
-# echo "------ creating ubuntu 20.04 LTS ------"
-# cp ./images/ubuntu_20.04.qcow2 ./images/ubuntu_20.04-nchc.qcow2
-# echo "------ remove auto-login ------"
-# sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command "rm -rf /lib/systemd/system/getty@tty1.service" -a ./images/ubuntu_20.04-nchc.qcow2
-# echo "------ use nchc repo ------"
-# cp ./nchc/ubuntu/cloud.cfg-u20 ./nchc/ubuntu/cloud.cfg
-# sudo LIBGUESTFS_BACKEND=direct virt-copy-in './nchc/ubuntu/cloud.cfg' /etc/cloud/ -a ./images/ubuntu_20.04-nchc.qcow2
-# echo "------ prepare disk ------"
-# sudo LIBGUESTFS_BACKEND=direct virt-sysprep -a ./images/ubuntu_20.04-nchc.qcow2
+# NCHC variants of the Ubuntu images from create-ubuntu.sh: no auto-login, NCHC cloud.cfg (repo).
+g() { sudo LIBGUESTFS_BACKEND=direct "$@"; }
+cd "$(dirname "$0")" || exit 1
+[ -d nchc ] || { echo "nchc/ not found: copy the whole build-cloud-image dir, not just the script" >&2; exit 1; }
 
-echo "------ creating ubuntu 22.04 LTS ------"
-cp ./images/ubuntu_22.04.qcow2 ./images/ubuntu_22.04-nchc.qcow2
-echo "------ remove auto-login ------"
-sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command "rm -rf /lib/systemd/system/getty@tty1.service" -a ./images/ubuntu_22.04-nchc.qcow2
-echo "------ use nchc repo ------"
-cp ./nchc/ubuntu/cloud.cfg-u22 ./nchc/ubuntu/cloud.cfg
-sudo LIBGUESTFS_BACKEND=direct virt-copy-in './nchc/ubuntu/cloud.cfg' /etc/cloud/ -a ./images/ubuntu_22.04-nchc.qcow2
-echo "------ prepare disk ------"
-sudo LIBGUESTFS_BACKEND=direct virt-sysprep -a ./images/ubuntu_22.04-nchc.qcow2
+# subshell + set -e: a failed step stops this image only, the next one still builds
+build() (
+  set -e
+  v=$1 img=./images/ubuntu_$1-nchc.qcow2
+  echo "------ creating ubuntu $v LTS nchc ------"
+  cp "./images/ubuntu_$v.qcow2" "$img"
+  g virt-customize -a "$img" \
+    --run-command 'rm -rf /lib/systemd/system/getty@tty1.service' \
+    --upload "./nchc/ubuntu/cloud.cfg-u${v%.*}:/etc/cloud/cloud.cfg"
+  g virt-sysprep -a "$img"
+  echo "------ Done ubuntu $v nchc ------"
+)
 
-echo "------ creating ubuntu 24.04 LTS ------"
-cp ./images/ubuntu_24.04.qcow2 ./images/ubuntu_24.04-nchc.qcow2
-echo "------ remove auto-login ------"
-sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command "rm -rf /lib/systemd/system/getty@tty1.service" -a ./images/ubuntu_24.04-nchc.qcow2
-echo "------ use nchc repo ------"
-cp ./nchc/ubuntu/cloud.cfg-u24 ./nchc/ubuntu/cloud.cfg
-sudo LIBGUESTFS_BACKEND=direct virt-copy-in './nchc/ubuntu/cloud.cfg' /etc/cloud/ -a ./images/ubuntu_24.04-nchc.qcow2
-echo "------ prepare disk ------"
-sudo LIBGUESTFS_BACKEND=direct virt-sysprep -a ./images/ubuntu_24.04-nchc.qcow2
-
-echo "------ Done ------"
-
-
-echo "------ creating ubuntu 26.04 LTS ------"
-cp ./images/ubuntu_26.04.qcow2 ./images/ubuntu_26.04-nchc.qcow2
-echo "------ remove auto-login ------"
-sudo LIBGUESTFS_BACKEND=direct virt-customize --run-command "rm -rf /lib/systemd/system/getty@tty1.service" -a ./images/ubuntu_26.04-nchc.qcow2
-echo "------ use nchc repo ------"
-cp ./nchc/ubuntu/cloud.cfg-u26 ./nchc/ubuntu/cloud.cfg
-sudo LIBGUESTFS_BACKEND=direct virt-copy-in './nchc/ubuntu/cloud.cfg' /etc/cloud/ -a ./images/ubuntu_26.04-nchc.qcow2
-echo "------ prepare disk ------"
-sudo LIBGUESTFS_BACKEND=direct virt-sysprep -a ./images/ubuntu_26.04-nchc.qcow2
-
-echo "------ Done ------"
+for v in 22.04 24.04 26.04; do build "$v"; done
