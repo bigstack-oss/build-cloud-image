@@ -1,39 +1,28 @@
-
 #!/bin/bash
-echo "------ creating fedora 40 ------"
-rm -rf ./images/fedora_40.qcow2
-wget https://mirror.twds.com.tw/fedora/fedora/linux/releases/40/Cloud/x86_64/images/Fedora-Cloud-Base-Generic.x86_64-40-1.14.qcow2  -O ./images/fedora_40.qcow2
-echo "------ install pkg ------"
-sudo virt-customize --install nfs-utils --selinux-relabel -a ./images/fedora_40.qcow2
-sudo virt-customize --install cifs-utils --selinux-relabel -a ./images/fedora_40.qcow2
-sudo virt-customize --install qemu-guest-agent --selinux-relabel -a ./images/fedora_40.qcow2
-echo "------ customize settings ------"
-sudo virt-customize --run-command "mkdir /etc/docker" -a ./images/fedora_40.qcow2
-cp ./config/fedora/getty-f40 ./config/fedora/getty@tty1.service
-cp ./config/fedora/cloud-f40.cfg ./config/fedora/cloud.cfg
-sudo virt-copy-in './config/fedora/getty@tty1.service' /lib/systemd/system/ -a ./images/fedora_40.qcow2
-sudo virt-copy-in './config/fedora/cloud.cfg' /etc/cloud/ -a ./images/fedora_40.qcow2
-sudo virt-copy-in './config/daemon.json' /etc/docker/ -a ./images/fedora_40.qcow2
-echo "------ disable kernel auto update ------"
-sudo virt-customize --run-command "echo 'exclude=kernel*' >> /etc/dnf/dnf.conf" -a ./images/fedora_40.qcow2
-sudo virt-sysprep -a ./images/fedora_40.qcow2
-echo "------ Done ------"
+# Fedora cloud images, same customization as create-rocky.sh.
+g() { sudo LIBGUESTFS_BACKEND=direct "$@"; }
+cd "$(dirname "$0")" || exit 1
+[ -d config ] || { echo "config/ not found: copy the whole build-cloud-image dir, not just the script" >&2; exit 1; }
+mkdir -p images
 
-echo "------ creating fedora 39 ------"
-rm -rf ./images/fedora_39.qcow2
-wget https://mirror.twds.com.tw/fedora/fedora/linux/releases/39/Cloud/x86_64/images/Fedora-Cloud-Base-39-1.5.x86_64.qcow2 -O ./images/fedora_39.qcow2
-echo "------ install pkg ------"
-sudo virt-customize --install nfs-utils --selinux-relabel -a ./images/fedora_39.qcow2
-sudo virt-customize --install cifs-utils --selinux-relabel -a ./images/fedora_39.qcow2
-sudo virt-customize --install qemu-guest-agent --selinux-relabel -a ./images/fedora_39.qcow2
-echo "------ customize settings ------"
-sudo virt-customize --run-command "mkdir /etc/docker" -a ./images/fedora_39.qcow2
-cp ./config/fedora/getty-f39 ./config/fedora/getty@tty1.service
-cp ./config/fedora/cloud-f39.cfg ./config/fedora/cloud.cfg
-sudo virt-copy-in './config/fedora/getty@tty1.service' /lib/systemd/system/ -a ./images/fedora_39.qcow2
-sudo virt-copy-in './config/fedora/cloud.cfg' /etc/cloud/ -a ./images/fedora_39.qcow2
-sudo virt-copy-in './config/daemon.json' /etc/docker/ -a ./images/fedora_39.qcow2
-echo "------ disable kernel auto update ------"
-sudo virt-customize --run-command "echo 'exclude=kernel*' >> /etc/dnf/dnf.conf" -a ./images/fedora_39.qcow2
-sudo virt-sysprep -a ./images/fedora_39.qcow2
-echo "------ Done ------"
+# subshell + set -e: a failed step stops this image only, the next one still builds
+build() (
+  set -e
+  v=$1 img=./images/fedora_$1.qcow2
+  echo "------ creating fedora $v ------"
+  # EOL releases live on the archive, not on regular mirrors
+  wget "https://archives.fedoraproject.org/pub/archive/fedora/linux/releases/$v/Cloud/x86_64/images/$2" -O "$img"
+  g virt-customize -a "$img" \
+    --install nfs-utils,cifs-utils,qemu-guest-agent \
+    --mkdir /etc/docker \
+    --upload "./config/fedora/getty-f$v:/lib/systemd/system/getty@tty1.service" \
+    --upload "./config/fedora/cloud-f$v.cfg:/etc/cloud/cloud.cfg" \
+    --copy-in ./config/daemon.json:/etc/docker \
+    --run-command 'sed -i "s/^SELINUX=enforcing/SELINUX=permissive/" /etc/selinux/config' \
+    --selinux-relabel
+  g virt-sysprep -a "$img"
+  echo "------ Done fedora $v ------"
+)
+
+build 40 Fedora-Cloud-Base-Generic.x86_64-40-1.14.qcow2
+build 39 Fedora-Cloud-Base-39-1.5.x86_64.qcow2
